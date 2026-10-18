@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { useDebouncedCallback } from 'use-debounce';
 import { fetchNotes } from '../../lib/api';
 import SearchBox from '../../components/SearchBox/SearchBox';
@@ -31,6 +31,7 @@ const NotesClient = () => {
     queryKey: ['notes', page, debouncedSearch],
     queryFn: () => fetchNotes(page, debouncedSearch),
     refetchOnMount: false,
+    placeholderData: keepPreviousData,
   });
 
   return (
